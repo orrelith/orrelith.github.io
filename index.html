@@ -37,6 +37,10 @@
       display: block;
       margin: 0 auto 1.5rem;
     }
+    /* Silhouette polygon — fill matches page background so it occludes
+       whatever is drawn behind it (back arc + back satellite) without
+       being visible itself. */
+    #ico-silhouette { fill: #fff; }
     .tagline {
       font-size: clamp(1rem, 2.2vw, 1.25rem);
       color: #222;
@@ -49,20 +53,7 @@
       color: #999;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 2rem;
     }
-    .contact {
-      font-size: 0.95rem;
-      color: #111;
-    }
-    .contact a {
-      color: #111;
-      text-decoration: none;
-      border-bottom: 1px solid #111;
-      padding-bottom: 2px;
-      transition: opacity 0.2s ease;
-    }
-    .contact a:hover { opacity: 0.55; }
     @media (max-width: 600px) {
       body { padding: 1.5rem 1rem; }
       .tagline { font-size: 1rem; }
@@ -70,9 +61,9 @@
     @media (prefers-color-scheme: dark) {
       body { background: #0a0a0a; color: #f5f5f5; }
       .logo { filter: invert(1); }
+      #ico-silhouette { fill: #0a0a0a; }
       .tagline { color: #ddd; }
       .status { color: #666; }
-      .contact, .contact a { color: #f5f5f5; border-bottom-color: #f5f5f5; }
     }
   </style>
 </head>
@@ -86,78 +77,83 @@
          role="img" aria-label="Orrelith — digital twin engine for European smallsat operators">
 
       <defs>
-        <mask id="stone-silhouette">
-          <rect x="0" y="100" width="400" height="230" fill="white"/>
-          <polygon points="200,127.5 271.6,167.6 257.9,214.7 257.9,250.2 200,272.5 128.5,232.4 142.1,185.4 142.1,149.8" fill="black">
-            <animateTransform attributeName="transform" attributeType="XML" type="rotate"
-                              from="0 200 200" to="360 200 200" dur="40s" repeatCount="indefinite"/>
-          </polygon>
-        </mask>
-        <linearGradient id="half-fade" x1="200" y1="200" x2="80" y2="200" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stop-color="white"/>
-          <stop offset="1" stop-color="black"/>
-          <animateTransform attributeName="gradientTransform" attributeType="XML" type="rotate"
-                            from="0 200 200" to="360 200 200" dur="40s" repeatCount="indefinite"/>
-        </linearGradient>
-        <mask id="half-fade-mask">
-          <rect x="0" y="100" width="400" height="230" fill="url(#half-fade)"/>
-        </mask>
-        <path id="orbit-path"
-              d="M 330.48 200 A 155 58 -15 0 1 69.52 200 A 155 58 -15 0 1 330.48 200"
+        <path id="orbit-back-path"
+              d="M 69.52 200 A 155 58 -15 0 1 330.48 200"
+              fill="none" stroke="none"/>
+        <path id="orbit-front-path"
+              d="M 330.48 200 A 155 58 -15 0 1 69.52 200"
               fill="none" stroke="none"/>
       </defs>
 
-      <path d="M 69.52 200 A 155 58 -15 0 1 330.48 200" stroke-width="1.2" mask="url(#stone-silhouette)"/>
+      <!-- Back orbit arc — visible everywhere; the silhouette polygon (drawn after)
+           covers it where it overlaps the stone, giving the depth illusion. -->
+      <path d="M 69.52 200 A 155 58 -15 0 1 330.48 200" stroke-width="1.2"/>
 
-      <g>
-        <animateTransform attributeName="transform" attributeType="XML" type="rotate"
-                          from="0 200 200" to="360 200 200" dur="40s" repeatCount="indefinite"/>
-        <g mask="url(#half-fade-mask)">
-          <g stroke-width="1.4">
-            <line x1="200"   y1="127.5" x2="271.6" y2="167.6"/>
-            <line x1="200"   y1="127.5" x2="222.1" y2="138.8"/>
-            <line x1="200"   y1="127.5" x2="222.1" y2="196.3"/>
-            <line x1="271.6" y1="167.6" x2="222.1" y2="138.8"/>
-            <line x1="222.1" y1="196.3" x2="271.6" y2="167.6"/>
-            <line x1="271.6" y1="167.6" x2="257.9" y2="214.7"/>
-            <line x1="271.6" y1="167.6" x2="257.9" y2="250.2"/>
-            <line x1="222.1" y1="138.8" x2="257.9" y2="214.7"/>
-            <line x1="222.1" y1="138.8" x2="177.9" y2="203.7"/>
-            <line x1="222.1" y1="196.3" x2="257.9" y2="250.2"/>
-            <line x1="222.1" y1="196.3" x2="177.9" y2="261.2"/>
-            <line x1="257.9" y1="214.7" x2="177.9" y2="203.7"/>
-            <line x1="257.9" y1="250.2" x2="257.9" y2="214.7"/>
-            <line x1="177.9" y1="261.2" x2="257.9" y2="250.2"/>
-            <line x1="200"   y1="272.5" x2="257.9" y2="214.7"/>
-            <line x1="200"   y1="272.5" x2="177.9" y2="203.7"/>
-            <line x1="200"   y1="272.5" x2="177.9" y2="261.2"/>
-            <line x1="200"   y1="272.5" x2="257.9" y2="250.2"/>
-          </g>
-          <g stroke-width="1.4" stroke-dasharray="4 3">
-            <line x1="200"   y1="127.5" x2="142.1" y2="149.8"/>
-            <line x1="200"   y1="127.5" x2="142.1" y2="185.4"/>
-            <line x1="222.1" y1="138.8" x2="142.1" y2="149.8"/>
-            <line x1="142.1" y1="149.8" x2="142.1" y2="185.4"/>
-            <line x1="142.1" y1="185.4" x2="222.1" y2="196.3"/>
-            <line x1="142.1" y1="149.8" x2="177.9" y2="203.7"/>
-            <line x1="142.1" y1="149.8" x2="128.5" y2="232.4"/>
-            <line x1="142.1" y1="185.4" x2="128.5" y2="232.4"/>
-            <line x1="142.1" y1="185.4" x2="177.9" y2="261.2"/>
-            <line x1="177.9" y1="203.7" x2="128.5" y2="232.4"/>
-            <line x1="128.5" y1="232.4" x2="177.9" y2="261.2"/>
-            <line x1="200"   y1="272.5" x2="128.5" y2="232.4"/>
-          </g>
-        </g>
-      </g>
-
-      <path d="M 330.48 200 A 155 58 -15 0 1 69.52 200" stroke-width="1.2"/>
-
-      <circle r="4" fill="#111" stroke="none">
-        <animateMotion dur="14s" repeatCount="indefinite">
-          <mpath xlink:href="#orbit-path"/>
+      <!-- Back satellite — drawn BEFORE silhouette so the stone occludes it on overlap.
+           Active only during the 7s when satellite is on the back arc. -->
+      <circle r="4" fill="#111" stroke="none" opacity="0">
+        <animateMotion dur="14s" repeatCount="indefinite"
+                       keyTimes="0;0.5;1" keyPoints="0;0;1" calcMode="linear">
+          <mpath xlink:href="#orbit-back-path"/>
         </animateMotion>
+        <animate attributeName="opacity" dur="14s" repeatCount="indefinite"
+                 values="0;1" keyTimes="0;0.5" calcMode="discrete"/>
       </circle>
 
+      <!-- Stone silhouette — opaque polygon, JS updates `points` each frame to match
+           the convex hull of the rotating 3D icosahedron's projected vertices. -->
+      <polygon id="ico-silhouette" stroke="none"/>
+
+      <!-- 30 wireframe edges — placeholder coords; JS replaces them each frame.
+           Stroke-dasharray is applied per edge dynamically when its midpoint z<0
+           (i.e. when that edge is on the back-facing side of the stone). -->
+      <g stroke-width="1.4">
+        <line id="edge-0"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-1"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-2"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-3"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-4"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-5"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-6"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-7"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-8"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-9"  x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-10" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-11" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-12" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-13" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-14" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-15" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-16" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-17" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-18" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-19" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-20" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-21" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-22" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-23" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-24" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-25" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-26" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-27" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-28" x1="0" y1="0" x2="0" y2="0"/>
+        <line id="edge-29" x1="0" y1="0" x2="0" y2="0"/>
+      </g>
+
+      <!-- Front orbit arc — drawn after the stone, on top. -->
+      <path d="M 330.48 200 A 155 58 -15 0 1 69.52 200" stroke-width="1.2"/>
+
+      <!-- Front satellite — drawn last in its half (0–7s), always on top of stone. -->
+      <circle r="4" fill="#111" stroke="none">
+        <animateMotion dur="14s" repeatCount="indefinite"
+                       keyTimes="0;0.5;1" keyPoints="0;1;1" calcMode="linear">
+          <mpath xlink:href="#orbit-front-path"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="14s" repeatCount="indefinite"
+                 values="1;0" keyTimes="0;0.5" calcMode="discrete"/>
+      </circle>
+
+      <!-- Static wordmark (does not rotate) -->
       <g stroke-width="1.6">
         <path d="M 132 283 L 138 283 L 142 287 L 142 301 L 138 305 L 132 305 L 128 301 L 128 287 Z"/>
         <path d="M 149 305 L 149 283 L 161 283 L 161 294 L 149 294 M 155 294 L 163 305"/>
@@ -168,11 +164,107 @@
         <path d="M 240 283 L 252 283 M 246 283 L 246 305"/>
         <path d="M 259 283 L 259 305 M 273 283 L 273 305 M 259 294 L 273 294"/>
       </g>
+
+      <!-- Real 3D wireframe rotation. Icosahedron defined by 12 vertices on a
+           sphere of radius √(1+φ²); 30 edges connect every vertex to its 5
+           nearest neighbours. Each frame: rotate around the Y axis, project to
+           2D with a constant X-tilt, update SVG line coords, dash any edge
+           whose midpoint is on the far side (z < 0). -->
+      <script><![CDATA[
+        (function() {
+          const PHI = (1 + Math.sqrt(5)) / 2;
+          const verts = [
+            [ 0,  1,  PHI], [ 0, -1,  PHI], [ 0,  1, -PHI], [ 0, -1, -PHI],
+            [ 1,  PHI,  0], [-1,  PHI,  0], [ 1, -PHI,  0], [-1, -PHI,  0],
+            [ PHI,  0,  1], [ PHI,  0, -1], [-PHI,  0,  1], [-PHI,  0, -1]
+          ];
+
+          // Build 30-edge list: pairs at squared distance 4 (icosahedron edge length is 2)
+          const edges = [];
+          for (let i = 0; i < 12; i++) {
+            for (let j = i + 1; j < 12; j++) {
+              const dx = verts[i][0] - verts[j][0];
+              const dy = verts[i][1] - verts[j][1];
+              const dz = verts[i][2] - verts[j][2];
+              if (Math.abs(dx*dx + dy*dy + dz*dz - 4) < 0.01) edges.push([i, j]);
+            }
+          }
+
+          const cx = 200, cy = 200, scale = 45;
+          // Constant tilt around X axis — gives "looking slightly down at the stone"
+          // perspective. Y-axis rotation is what animates over time.
+          const tiltX = -0.35;
+          const cxT = Math.cos(tiltX), sxT = Math.sin(tiltX);
+          const periodMs = 30000;  // 30s per full revolution — ambient pace
+
+          const lineEls = edges.map((_, i) => document.getElementById('edge-' + i));
+          const silhouetteEl = document.getElementById('ico-silhouette');
+
+          function project(v, sY, cY) {
+            // Constant X tilt
+            const y1 = v[1] * cxT - v[2] * sxT;
+            const z1 = v[1] * sxT + v[2] * cxT;
+            // Animated Y rotation
+            const x2 = v[0] * cY + z1 * sY;
+            const z2 = -v[0] * sY + z1 * cY;
+            return { x: cx + x2 * scale, y: cy - y1 * scale, z: z2 };
+          }
+
+          // Andrew's monotone-chain convex hull. The icosahedron is convex, so the
+          // 2D silhouette is the convex hull of its projected vertices.
+          function convexHull(pts) {
+            const sorted = pts.slice().sort((a, b) => a.x - b.x || a.y - b.y);
+            const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+            const lower = [], upper = [];
+            for (const p of sorted) {
+              while (lower.length >= 2 && cross(lower[lower.length-2], lower[lower.length-1], p) <= 0) lower.pop();
+              lower.push(p);
+            }
+            for (let i = sorted.length - 1; i >= 0; i--) {
+              const p = sorted[i];
+              while (upper.length >= 2 && cross(upper[upper.length-2], upper[upper.length-1], p) <= 0) upper.pop();
+              upper.push(p);
+            }
+            return lower.slice(0, -1).concat(upper.slice(0, -1));
+          }
+
+          const start = performance.now();
+
+          function tick(t) {
+            const angle = ((t - start) / periodMs) * 2 * Math.PI;
+            const sY = Math.sin(angle), cY = Math.cos(angle);
+            const proj = verts.map(v => project(v, sY, cY));
+
+            const hull = convexHull(proj);
+            silhouetteEl.setAttribute('points',
+              hull.map(p => p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' '));
+
+            for (let i = 0; i < edges.length; i++) {
+              const [a, b] = edges[i];
+              const pA = proj[a], pB = proj[b];
+              const line = lineEls[i];
+              line.setAttribute('x1', pA.x.toFixed(1));
+              line.setAttribute('y1', pA.y.toFixed(1));
+              line.setAttribute('x2', pB.x.toFixed(1));
+              line.setAttribute('y2', pB.y.toFixed(1));
+              if ((pA.z + pB.z) / 2 < 0) {
+                line.setAttribute('stroke-dasharray', '4 3');
+              } else {
+                line.removeAttribute('stroke-dasharray');
+              }
+            }
+
+            requestAnimationFrame(tick);
+          }
+
+          // Draw initial frame synchronously so first paint shows the stone, not a blank.
+          tick(performance.now());
+        })();
+      ]]></script>
     </svg>
 
     <p class="tagline">Digital twin engine for European smallsat operators.</p>
     <p class="status">Coming soon</p>
-    <p class="contact"><a href="mailto:hello@orrelith.space">hello@orrelith.space</a></p>
   </main>
 </body>
 </html>
