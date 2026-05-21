@@ -205,7 +205,10 @@
           // perspective. Y-axis rotation is what animates over time.
           const tiltX = -0.35;
           const cxT = Math.cos(tiltX), sxT = Math.sin(tiltX);
-          const periodMs = 30000;  // 30s per full revolution — ambient pace
+          // 56s = 4× the 14s satellite period → satellite makes a clean 4 laps per
+          // full stone revolution. Negative = counter-clockwise (when viewed from
+          // above-front), so the stone visually counter-rotates against the satellite.
+          const periodMs = -56000;
 
           const lineEls = edges.map((_, i) => document.getElementById('edge-' + i));
           const silhouetteEl = document.getElementById('ico-silhouette');
