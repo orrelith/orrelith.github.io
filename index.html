@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orrelith — Digital twin engine for European smallsat operators</title>
+  <meta name="description" content="Orrelith — a digital twin engine for European smallsat operators. Coming soon.">
+  <meta property="og:title" content="Orrelith">
+  <meta property="og:description" content="Digital twin engine for European smallsat operators.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://orrelith.space">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: #fff;
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    main {
+      max-width: 760px;
+      width: 100%;
+      text-align: center;
+    }
+    .logo {
+      width: 100%;
+      max-width: 720px;
+      height: auto;
+      display: block;
+      margin: 0 auto 1.5rem;
+    }
+    .tagline {
+      font-size: clamp(1rem, 2.2vw, 1.25rem);
+      color: #222;
+      margin: 0 auto 0.5rem;
+      max-width: 540px;
+      font-weight: 400;
+    }
+    .status {
+      font-size: 0.8rem;
+      color: #999;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .contact {
+      font-size: 0.95rem;
+      color: #111;
+    }
+    .contact a {
+      color: #111;
+      text-decoration: none;
+      border-bottom: 1px solid #111;
+      padding-bottom: 2px;
+      transition: opacity 0.2s ease;
+    }
+    .contact a:hover { opacity: 0.55; }
+    @media (max-width: 600px) {
+      body { padding: 1.5rem 1rem; }
+      .tagline { font-size: 1rem; }
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0a0a0a; color: #f5f5f5; }
+      .logo { filter: invert(1); }
+      .tagline { color: #ddd; }
+      .status { color: #666; }
+      .contact, .contact a { color: #f5f5f5; border-bottom-color: #f5f5f5; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <svg class="logo" xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         viewBox="0 100 400 230"
+         stroke="#111" fill="none"
+         stroke-linecap="round" stroke-linejoin="round"
+         role="img" aria-label="Orrelith — digital twin engine for European smallsat operators">
+
+      <defs>
+        <mask id="stone-silhouette">
+          <rect x="0" y="100" width="400" height="230" fill="white"/>
+          <polygon points="200,127.5 271.6,167.6 257.9,214.7 257.9,250.2 200,272.5 128.5,232.4 142.1,185.4 142.1,149.8" fill="black">
+            <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                              from="0 200 200" to="360 200 200" dur="40s" repeatCount="indefinite"/>
+          </polygon>
+        </mask>
+        <linearGradient id="half-fade" x1="200" y1="200" x2="80" y2="200" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stop-color="white"/>
+          <stop offset="1" stop-color="black"/>
+          <animateTransform attributeName="gradientTransform" attributeType="XML" type="rotate"
+                            from="0 200 200" to="360 200 200" dur="40s" repeatCount="indefinite"/>
+        </linearGradient>
+        <mask id="half-fade-mask">
+          <rect x="0" y="100" width="400" height="230" fill="url(#half-fade)"/>
+        </mask>
+        <path id="orbit-path"
+              d="M 330.48 200 A 155 58 -15 0 1 69.52 200 A 155 58 -15 0 1 330.48 200"
+              fill="none" stroke="none"/>
+      </defs>
+
+      <path d="M 69.52 200 A 155 58 -15 0 1 330.48 200" stroke-width="1.2" mask="url(#stone-silhouette)"/>
+
+      <g>
+        <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                          from="0 200 200" to="360 200 200" dur="40s" repeatCount="indefinite"/>
+        <g mask="url(#half-fade-mask)">
+          <g stroke-width="1.4">
+            <line x1="200"   y1="127.5" x2="271.6" y2="167.6"/>
+            <line x1="200"   y1="127.5" x2="222.1" y2="138.8"/>
+            <line x1="200"   y1="127.5" x2="222.1" y2="196.3"/>
+            <line x1="271.6" y1="167.6" x2="222.1" y2="138.8"/>
+            <line x1="222.1" y1="196.3" x2="271.6" y2="167.6"/>
+            <line x1="271.6" y1="167.6" x2="257.9" y2="214.7"/>
+            <line x1="271.6" y1="167.6" x2="257.9" y2="250.2"/>
+            <line x1="222.1" y1="138.8" x2="257.9" y2="214.7"/>
+            <line x1="222.1" y1="138.8" x2="177.9" y2="203.7"/>
+            <line x1="222.1" y1="196.3" x2="257.9" y2="250.2"/>
+            <line x1="222.1" y1="196.3" x2="177.9" y2="261.2"/>
+            <line x1="257.9" y1="214.7" x2="177.9" y2="203.7"/>
+            <line x1="257.9" y1="250.2" x2="257.9" y2="214.7"/>
+            <line x1="177.9" y1="261.2" x2="257.9" y2="250.2"/>
+            <line x1="200"   y1="272.5" x2="257.9" y2="214.7"/>
+            <line x1="200"   y1="272.5" x2="177.9" y2="203.7"/>
+            <line x1="200"   y1="272.5" x2="177.9" y2="261.2"/>
+            <line x1="200"   y1="272.5" x2="257.9" y2="250.2"/>
+          </g>
+          <g stroke-width="1.4" stroke-dasharray="4 3">
+            <line x1="200"   y1="127.5" x2="142.1" y2="149.8"/>
+            <line x1="200"   y1="127.5" x2="142.1" y2="185.4"/>
+            <line x1="222.1" y1="138.8" x2="142.1" y2="149.8"/>
+            <line x1="142.1" y1="149.8" x2="142.1" y2="185.4"/>
+            <line x1="142.1" y1="185.4" x2="222.1" y2="196.3"/>
+            <line x1="142.1" y1="149.8" x2="177.9" y2="203.7"/>
+            <line x1="142.1" y1="149.8" x2="128.5" y2="232.4"/>
+            <line x1="142.1" y1="185.4" x2="128.5" y2="232.4"/>
+            <line x1="142.1" y1="185.4" x2="177.9" y2="261.2"/>
+            <line x1="177.9" y1="203.7" x2="128.5" y2="232.4"/>
+            <line x1="128.5" y1="232.4" x2="177.9" y2="261.2"/>
+            <line x1="200"   y1="272.5" x2="128.5" y2="232.4"/>
+          </g>
+        </g>
+      </g>
+
+      <path d="M 330.48 200 A 155 58 -15 0 1 69.52 200" stroke-width="1.2"/>
+
+      <circle r="4" fill="#111" stroke="none">
+        <animateMotion dur="14s" repeatCount="indefinite">
+          <mpath xlink:href="#orbit-path"/>
+        </animateMotion>
+      </circle>
+
+      <g stroke-width="1.6">
+        <path d="M 132 283 L 138 283 L 142 287 L 142 301 L 138 305 L 132 305 L 128 301 L 128 287 Z"/>
+        <path d="M 149 305 L 149 283 L 161 283 L 161 294 L 149 294 M 155 294 L 163 305"/>
+        <path d="M 170 305 L 170 283 L 182 283 L 182 294 L 170 294 M 176 294 L 184 305"/>
+        <path d="M 191 283 L 203 283 M 191 305 L 203 305 M 191 283 L 191 305 M 191 294 L 201 294"/>
+        <path d="M 210 283 L 210 305 L 222 305"/>
+        <path d="M 231 283 L 231 305"/>
+        <path d="M 240 283 L 252 283 M 246 283 L 246 305"/>
+        <path d="M 259 283 L 259 305 M 273 283 L 273 305 M 259 294 L 273 294"/>
+      </g>
+    </svg>
+
+    <p class="tagline">Digital twin engine for European smallsat operators.</p>
+    <p class="status">Coming soon</p>
+    <p class="contact"><a href="mailto:hello@orrelith.space">hello@orrelith.space</a></p>
+  </main>
+</body>
+</html>
